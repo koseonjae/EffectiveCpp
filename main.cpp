@@ -2,6 +2,7 @@
 #include "NamedObject.h"
 #include "HomeForSale.h"
 #include "UncopyableHomeForSale.h"
+#include "DerivedAWOV.h"
 
 int main()
 {
@@ -21,5 +22,8 @@ int main()
     UncopyableHomeForSale uncopyableHomeForSale2;
 //    UncopyableHomeForSale uncopyableHomeForSale3( uncopyableHomeForSale1 ); // Uncopyable 상속으로 복사 생성자를 막음
 //    uncopyableHomeForSale1 = uncopyableHomeForSale2; // Uncopyable 상속으로 복사 대입 연산자를 막음
+
+    AWOV *awov = new DerivedAWOV();
+    delete awov;
     return 0;
 }
