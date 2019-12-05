@@ -1,7 +1,10 @@
 #include <iostream>
+#include "NamedObject.h"
 
 int main()
 {
-    std::cout << "Hello, World!" << std::endl;
+    NamedObject object1( "one", 1 ); // constructor
+    NamedObject object2( object1 ); // copy constructor
+    object2 = object1; // copy assignment operator
     return 0;
 }
