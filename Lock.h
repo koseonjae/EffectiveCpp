@@ -24,6 +24,16 @@ public:
 
     Lock& operator=( const Lock& rhs ) = delete;
 
+    pthread_mutex_t *get() // 자원관리 객체가 제공하는 명시적 변환 함수
+    {
+        return m_mutex.get();
+    }
+
+    operator pthread_mutex_t *() const
+    {
+        return m_mutex.get();
+    }
+
 private:
     shared_ptr<pthread_mutex_t> m_mutex;
 };

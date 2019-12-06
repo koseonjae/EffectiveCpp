@@ -43,6 +43,8 @@ int main()
 
     // CHAPTER 14
     Lock lock( new pthread_mutex_t );
+    pthread_mutex_t *ptr1 = lock.get(); // 명시적 자원 get
+    pthread_mutex_t *ptr2 = lock; // 암시적 자원 get, mutex가 아니라 Lock type에 대입하려고 한것일수도 있음 => 즉 실수의 위험이 있음
 
     return 0;
 }
