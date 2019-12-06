@@ -2,12 +2,12 @@
 
 #include "NamedObject.h"
 
-template < typename T >
-class DerivedNamedObject : public NamedObject< T >
+template <typename T>
+class DerivedNamedObject : public NamedObject<T>
 {
 public:
     DerivedNamedObject( const string& name, const T& value, const T& value2 )
-            : NamedObject< T >( name, value ), value2( value2 )
+            : NamedObject<T>( name, value ), value2( value2 )
     {
         printf( "DerivedNamedObject::Constructor \n" );
     }
@@ -18,7 +18,7 @@ public:
     }
 
     DerivedNamedObject( const DerivedNamedObject& rhs )
-            : NamedObject< T >::NamedObject( rhs ), value2( rhs.value2 )
+            : NamedObject<T>::NamedObject( rhs ), value2( rhs.value2 )
     {
         printf( "DerivedNamedObject::CopysContructor \n" );
     }
@@ -26,7 +26,7 @@ public:
     DerivedNamedObject& operator=( const DerivedNamedObject& rhs )
     {
         printf( "DerivedNamedObject::CopyAssignmentConstructor \n" );
-        NamedObject< T >::operator=( rhs );
+        NamedObject<T>::operator=( rhs );
         value2 = rhs.value2;
         return *this;
     }

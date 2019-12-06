@@ -12,7 +12,7 @@ protected:
     }
 
 private:
-    Uncopyable( const Uncopyable &rhs );
+    Uncopyable( const Uncopyable& rhs );
 
-    Uncopyable &operator=( const Uncopyable &rhs );
+    Uncopyable& operator=( const Uncopyable& rhs );
 };

@@ -9,7 +9,7 @@ public:
 
     virtual ~HomeForSale() = default;
 
-    HomeForSale( const HomeForSale &rhs ) = delete;
+    HomeForSale( const HomeForSale& rhs ) = delete;
 
-    HomeForSale &operator=( const HomeForSale &rhs ) = delete;
+    HomeForSale& operator=( const HomeForSale& rhs ) = delete;
 };
