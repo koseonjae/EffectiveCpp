@@ -1,0 +1,1 @@
+#include "DerivedNamedObject.h"

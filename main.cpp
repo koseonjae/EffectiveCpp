@@ -3,6 +3,7 @@
 #include "HomeForSale.h"
 #include "UncopyableHomeForSale.h"
 #include "DerivedAWOV.h"
+#include "DerivedNamedObject.h"
 
 int main()
 {
@@ -25,5 +26,10 @@ int main()
 
     AWOV *awov = new DerivedAWOV();
     delete awov;
+
+    DerivedNamedObject derivedNamedObject1( "three", 3, 3 );
+
+    DerivedNamedObject derivedNamedObject2( derivedNamedObject1 );
+
     return 0;
 }
