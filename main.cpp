@@ -4,6 +4,7 @@
 #include "UncopyableHomeForSale.h"
 #include "DerivedAWOV.h"
 #include "DerivedNamedObject.h"
+#include "Lock.h"
 
 void testChapter13( void )
 {
@@ -38,7 +39,10 @@ int main()
 //    DerivedNamedObject derivedNamedObject2( derivedNamedObject1 );
 
     // CHAPTER 13
-    testChapter13();
+//    testChapter13();
+
+    // CHAPTER 14
+    Lock lock( new pthread_mutex_t );
 
     return 0;
 }
