@@ -10,11 +10,9 @@ template<typename T>
 class NamedObject
 {
 public:
-    NamedObject( const string &name, const T &value )
+    NamedObject( const string &name, const T &value ) : name( name ), value( value )
     {
         printf( "NamedObject::Constructor %s \n", name.c_str() );
-        this->name = name;
-        this->value = value;
     }
 
     virtual ~NamedObject()
@@ -22,11 +20,9 @@ public:
         printf( "NamedObject::Destructor %s \n", name.c_str() );
     }
 
-    NamedObject( const NamedObject &rhs )
+    NamedObject( const NamedObject &rhs ) : name( rhs.name ), value( rhs.value )
     {
         printf( "NamedObject::CopysContructor %s \n", name.c_str() );
-        this->name = rhs.name;
-        this->value = rhs.value;
     }
 
     NamedObject &operator=( const NamedObject &rhs )
