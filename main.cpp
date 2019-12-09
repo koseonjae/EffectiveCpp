@@ -50,12 +50,24 @@ int main()
     pthread_mutex_t *mutexPts = new pthread_mutex_t;
     Lock2 lock2( mutexPts );
 
-    // make_shared의 장단점: raw pointer 직접 건드리지 않아 안전 & allocater, deallocater 지정 불가 & 메모리할당이 한번에 이뤄지므로 메모리 릭의 위험 없음
+    // MAKE_SHARED
+    // raw pointer 직접 건드리지 않아 안전 & allocater, deallocater 지정 불가 & 메모리할당이 한번에 이뤄지므로 메모리 릭의 위험 없음
     // new를 할 경우 f(shared_ptr<int>(new int(42)), g()); 호출시 new가 되고 shared_ptr에 등록되는 사이에 g가 불려 exception발생하면 leak이 생김
+    // make_shared의 경우 내부적으로 control block과 new 가 동시에 호출되지만, new를 직접쓰는경우는 control block과 따로 호출되므로 overhead가 있음
+    // 어떤 클래스가 custom new, delete를 를 정의햇을경우 make_shared에선 이를 호출할수 없기때문에 사용불가
+    // control block에는 reference count와 weak reference count 두 정보를 저장
+    // 주의!!       : make_shared와 new 에 따라 메모리 해제 시점이 달라짐
+    // make_shared : control block과 T의 메모리를 함께 관리 -> refCount와 weakRefCount가 모두 0이 되어야만 control block과 T 메모리가 동시 해제됨
+    // new         : refCount가 0이 될때 T메모리 해제, weakRefCount까지 0이 될때 control block 메모리 해제
+    // => make_shared의 경우 shared_ptr이 모두 없어져 refCount가 0이되고 weak_ptr만 남아있어도 메모리에 남아있게 되어 비효율적임
+    // => make_shared는 코드 중복, 예외, 속도에 유리함, make_shared와 new의 메모리 관리정책을 이해하고 적절하게 사용 필요
 
     std::shared_ptr<pthread_mutex_t> mutex = make_shared<pthread_mutex_t>(); // make_shared: default allocator, deallocator 사용
     std::shared_ptr<pthread_mutex_t> mutex1( new pthread_mutex_t ); // allocator 만 지정
     std::shared_ptr<pthread_mutex_t> mutex2( new pthread_mutex_t, pthread_mutex_unlock ); // allocator, deallocator 를 지정
+
+    std::shared_ptr<int> intPtr = make_shared<int>();
+    weak_ptr<int> weak_intPtr = intPtr;
 
     // MOVE
     // T&& 리턴, const가 붙으면 const T&& 리턴
