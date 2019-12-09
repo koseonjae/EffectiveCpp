@@ -57,5 +57,26 @@ int main()
     std::shared_ptr<pthread_mutex_t> mutex1( new pthread_mutex_t ); // allocator 만 지정
     std::shared_ptr<pthread_mutex_t> mutex2( new pthread_mutex_t, pthread_mutex_unlock ); // allocator, deallocator 를 지정
 
+    // MOVE
+    // T&& 리턴, const가 붙으면 const T&& 리턴
+    // const 객체에 std::move를 쓴다는게 허용이 되더라도 대부분의 경우 매우 이상한 경우임!!
+    // string class에 'string&&' 생성자만 있고, 'const string&&' 생성자는 없기때문에, move를 하더라도 lvalue 복사 생성자('const string&') 호출됨
+    string s1{ std::move( ( const string ) to_string( 0 ) ) }; // string( const basic_string& ) 호출 -> 이런식으로 const객체에 std::move를 쓰는건 이상한 케이스임
+    string s2{ std::move( to_string( 0 ) ) };                  // string( basic_string&& ) 호출
+
+    // FORWARD
+    // std::forword : 인자가 rvalue일땐 rvalue 리턴, lvalue일땐 lvalue 리턴 : 두 파라미터 타입을 overloading
+    // _Tp&& forward(typename remove_reference<_Tp>::type& __t)
+    // _Tp&& forward(typename remove_reference<_Tp>::type&& __t)
+    // 위 forward정의에서 lvalue에 대한 return type도 rvalue로 되어잇는데 이게 사실 rvalue로 casting 되어도 lvalue로 간주됨
+
+    string&& lvalue2ralue = to_string( 11 ); // lvalue에 return type도 rvalue로 되어있는데, 사실 rvalue로 casting되어도 lvalue로 간주됨
+    forward<string>( lvalue2ralue ); // 이 forward 함수가 lvalue 정의로 호출되는것을 알 수 있음
+
+    // lvalue forward
+    string lvalueStr = to_string( 0 );
+    auto lvalueResult = std::forward<string>( lvalueStr );
+    auto&& rvalueResult = std::forward<string>( std::move( lvalueStr ) ); // rvalue forward
+
     return 0;
 }
