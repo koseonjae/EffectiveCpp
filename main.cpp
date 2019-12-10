@@ -6,6 +6,7 @@
 #include "DerivedNamedObject.h"
 #include "Lock.h"
 #include "Lock2.h"
+#include "Investment.h"
 
 void testChapter13( void )
 {
@@ -63,8 +64,8 @@ int main()
     // => make_shared는 코드 중복, 예외, 속도에 유리함, make_shared와 new의 메모리 관리정책을 이해하고 적절하게 사용 필요
 
     std::shared_ptr<pthread_mutex_t> mutex = make_shared<pthread_mutex_t>(); // make_shared: default allocator, deallocator 사용
-    std::shared_ptr<pthread_mutex_t> mutex1( new pthread_mutex_t ); // allocator 만 지정
-    std::shared_ptr<pthread_mutex_t> mutex2( new pthread_mutex_t, pthread_mutex_unlock ); // allocator, deallocator 를 지정
+    std::shared_ptr<pthread_mutex_t> mutex1( new pthread_mutex_t() ); // allocator 만 지정
+    std::shared_ptr<pthread_mutex_t> mutex2( new pthread_mutex_t(), pthread_mutex_unlock ); // allocator, deallocator 를 지정
 
     std::shared_ptr<int> intPtr = make_shared<int>();
     weak_ptr<int> weak_intPtr = intPtr;
@@ -89,6 +90,8 @@ int main()
     string lvalueStr = to_string( 0 );
     auto lvalueResult = std::forward<string>( lvalueStr );
     auto&& rvalueResult = std::forward<string>( std::move( lvalueStr ) ); // rvalue forward
+
+    shared_ptr<Investment> investmentPtr = InvestmentFactory::createInvestment();
 
     return 0;
 }
