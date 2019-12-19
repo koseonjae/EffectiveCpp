@@ -10,20 +10,20 @@
 // const -> operator* 등에서 a * b = c 가 불가능하도록
 // 일관성 -> 번듯한 이유가 없다면 기본제공타입처럼 동작하게 하자 (일관성있게 짜자)
 // 컴파일 -> 잘못짜면 컴파일이 안돼게 하자, 컴파일이 되는 코드는 제대로 동작하는것을 보장하게 하자
-
-class chapter18_Investment
-{
-private:
-    chapter18_Investment() = default;
-
-    virtual ~chapter18_Investment() = default;
-};
-
-class InvestmentFactory
-{
-public:
-    static std::shared_ptr<chapter18_Investment> createInvestment()
-    {
-        return std::make_shared<chapter18_Investment>();
-    }
-};
+//
+//class chapter18_Investment
+//{
+//private:
+//    chapter18_Investment() = default;
+//
+//    virtual ~chapter18_Investment() = default;
+//};
+//
+//class InvestmentFactory
+//{
+//public:
+//    static std::shared_ptr<chapter18_Investment> createInvestment()
+//    {
+//        return std::make_shared<chapter18_Investment>();
+//    }
+//};

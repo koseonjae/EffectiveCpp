@@ -91,7 +91,7 @@ int main()
     auto lvalueResult = std::forward<string>( lvalueStr );
     auto&& rvalueResult = std::forward<string>( std::move( lvalueStr ) ); // rvalue forward
 
-    shared_ptr<chapter18_Investment> investmentPtr = InvestmentFactory::createInvestment();
+//    shared_ptr<chapter18_Investment> investmentPtr = InvestmentFactory::createInvestment();
 
     return 0;
 }
