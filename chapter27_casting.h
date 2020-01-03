@@ -16,6 +16,6 @@ public:
         int a1 = ( int ) 3;
         int a2 = int( 3 );
 
-        
+
     }
 };
