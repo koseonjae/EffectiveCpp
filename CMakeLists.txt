@@ -10,3 +10,4 @@ add_executable( chapter33 chapter33_AvoidNameMissing.h chapter33_AvoidNameMissin
 add_executable( chapter34 chapter34_InterfaceAndImplementation.h chapter34_InterfaceAndImplementation.cpp )
 add_executable( chapter36 chapter36_DoNotOverrideNonVirtual.cpp )
 add_executable( chapter37 chapter37_DefaultValueDoStaticBinding.cpp )
+add_executable( chapter38 chapter38_Composition.cpp )
