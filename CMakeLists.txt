@@ -11,3 +11,4 @@ add_executable( chapter34 chapter34_InterfaceAndImplementation.h chapter34_Inter
 add_executable( chapter36 chapter36_DoNotOverrideNonVirtual.cpp )
 add_executable( chapter37 chapter37_DefaultValueDoStaticBinding.cpp )
 add_executable( chapter38 chapter38_Composition.cpp )
+add_executable( chapter39 chapter39_PrivateInteritance.cpp )
